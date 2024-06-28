@@ -1,0 +1,8 @@
+node_modules**/.dockerignore
+**/.git
+**/.gitignore
+**/.vscode
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules

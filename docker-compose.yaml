@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "6060:9090"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://lelyalelya:margaritka@db/cocktails
+    volumes:
+      - .:/app
+    command: pnpm start
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: margaritka
+      POSTGRES_USER: lelyalelya
+      POSTGRES_DB: cocktails
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:

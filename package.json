@@ -1,0 +1,34 @@
+{
+  "name": "cocktails-backend-postgres",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "packageManager": "pnpm@8.3.1+sha1.75c6e8a4075abfc494770f998bf37b9ada110f51",
+  "scripts": {
+    "test": "tsx --test $(glob '**/*.test.ts')",
+    "start": "tsx server.ts",
+    "build": "rm -rf ./dist && esbuild server.ts --bundle --packages=external --outdir=dist --target=node20 --platform=node --format=esm",
+    "check-types": "tsc"
+  },
+  "keywords": [],
+  "author": "Olga Urentseva",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "fastify": "^4.28.0",
+    "http-errors": "^2.0.0",
+    "json-schema-to-ts": "^3.1.0",
+    "qs": "^6.12.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.0",
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/http-errors": "^2.0.4",
+    "@types/node": "^20.14.7",
+    "@types/qs": "^6.9.15",
+    "esbuild": "^0.21.5",
+    "fastify-plugin": "^4.5.1",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.2"
+  }
+}
