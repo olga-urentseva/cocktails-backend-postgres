@@ -1,0 +1,36 @@
+services:
+  cocktails-backend-postgres:
+    image: ghcr.io/olga-urentseva/cocktails-backend-postgres:${GIT_COMMIT_SHA}
+    networks:
+      - proxy
+      - db
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.services.cocktails-backend-postgres.loadbalancer.server.port=9090"
+        - "traefik.http.routers.cocktails-backend-postgres-web.rule=Host(`cocktails-api.mooo.com`)"
+        - "traefik.http.routers.cocktails-backend-postgres-web.entrypoints=web"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.rule=Host(`cocktails-api.mooo.com`)"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.entrypoints=websecure"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.tls=true"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.tls.certresolver=letsencrypt"
+
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+        - "traefik.http.routers.cocktails-backend-postgres-web.middlewares=redirect-to-https"
+
+        - "traefik.http.middlewares.cors.headers.accesscontrolallowmethods=GET"
+        - "traefik.http.middlewares.cors.headers.accesscontrolallowheaders=*"
+        - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=*"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.middlewares=cors"
+
+      replicas: 2
+      update_config:
+        parallelism: 1
+        order: start-first
+
+networks:
+  proxy:
+    external: true
+  db:
+    externl: true
