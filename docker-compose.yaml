@@ -7,20 +7,15 @@ services:
       - "6060:9090"
     environment:
       NODE_ENV: development
-      DATABASE_URL: postgres://lelyalelya:margaritka@db/cocktails
+      DATABASE_URL: postgres://cocktails-backend:password@db/cocktails
     volumes:
       - .:/app
     command: pnpm start
 
   db:
-    image: postgres:latest
+    image: postgres:16.3
     restart: always
     environment:
-      POSTGRES_PASSWORD: margaritka
-      POSTGRES_USER: lelyalelya
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: cocktails-backend
       POSTGRES_DB: cocktails
-    volumes:
-      - data:/var/lib/postgresql/data
-
-volumes:
-  data:

@@ -5,7 +5,7 @@
   "main": "server.js",
   "packageManager": "pnpm@8.3.1+sha1.75c6e8a4075abfc494770f998bf37b9ada110f51",
   "scripts": {
-    "test": "tsx --test $(glob '**/*.test.ts')",
+    "test": "tsx --test",
     "start": "tsx server.ts",
     "build": "rm -rf ./dist && esbuild server.ts --bundle --packages=external --outdir=dist --target=node20 --platform=node --format=esm",
     "check-types": "tsc"
@@ -15,9 +15,11 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "drizzle-orm": "^0.32.0",
     "fastify": "^4.28.0",
     "http-errors": "^2.0.0",
     "json-schema-to-ts": "^3.1.0",
+    "postgres": "^3.4.4",
     "qs": "^6.12.1"
   },
   "devDependencies": {
@@ -26,8 +28,10 @@
     "@types/http-errors": "^2.0.4",
     "@types/node": "^20.14.7",
     "@types/qs": "^6.9.15",
+    "drizzle-kit": "^0.23.0",
     "esbuild": "^0.21.5",
     "fastify-plugin": "^4.5.1",
+    "prettier": "^3.3.3",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2"
   }

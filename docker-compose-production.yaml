@@ -4,6 +4,8 @@ services:
     networks:
       - proxy
       - db
+    env_file:
+      - /opt/docker-projects/cocktails-backend/.env
     deploy:
       labels:
         - "traefik.enable=true"

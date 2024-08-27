@@ -1,0 +1,170 @@
+[
+  {
+    "collectionName": "Spring",
+    "id": "spring",
+    "description": "From zesty citrus blends to light floral infusions, for all of you who are tired of this f winter.",
+    "imageUrl": "https://images.pexels.com/photos/8755230/pexels-photo-8755230.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "cocktails": [
+      "da-3S9e_XsaAGwCS2jYa2",
+      "t-SIIz8L0JZZC6ZsRu2d3",
+      "KXD3lvlQppsl_D3hERoXF",
+      "ZsimDsI8ATo31XKBtVvFt",
+      "AT7Hpt-EW91j5DVgx32x3",
+      "Xx7l7Cm4HzPPGcNg8V1YV",
+      "vYrLglljo1hdTv8FZV_Bf",
+      "YZWOT3XUmoTWiOMG78709",
+      "d2rTP4IRDQqQvKD7HV47I",
+      "XIEVpUUVYF4Vr36kUcB7v",
+      "Ep1_oICDyxnhc-fKy_FAA"
+    ]
+  },
+  {
+    "collectionName": "Classic",
+    "description": "Сlassics never go out of date, unlike you",
+    "id": "classic",
+    "imageUrl": "https://www.thecocktaildb.com/images/media/drink/wfqmgm1630406820.jpg",
+    "cocktails": [
+      "RsPHZs1I1ew4Aca-sDZax",
+      "CG6yl2BlxOKVbnjg-Ijxg",
+      "1socb7-fv9FKc99C2o0-r",
+      "H8Vnp4Dd1uBzqb6aOBYhP",
+      "3Nr9PUV5A8wPBL-3mDUuW",
+      "0fVI4vPM3vfY0V03VC2Kn",
+      "CFeOABIdvmVY4B97QM7g0",
+      "YUZAj8yD6SZWw8WjQ_eM6",
+      "m_gFIzZ__o4mFMbj3Igem",
+      "YZWOT3XUmoTWiOMG78709",
+      "GGkCOT98WCbIv95j7wEIN",
+      "EThh67pPuBH5pw417ERnm"
+    ]
+  },
+  {
+    "collectionName": "Hozier core",
+    "description": "Forrest daddy's core cocktails and drinks. Not too sweet, I promise",
+    "id": "hozier",
+    "imageUrl": "https://i.pinimg.com/736x/de/9a/cf/de9acff7fd7d8217d2e5a71358e77450.jpg",
+    "cocktails": [
+      "unncqbbKx4w8R9zshSqwl",
+      "1rTrgLPNB9l7IBn2BxWW-",
+      "upjUvP3wMhLn8s_1AGZ3w",
+      "Xx7l7Cm4HzPPGcNg8V1YV",
+      "8od4UGV0ZpwTmC5HMJGnS",
+      "a1L75d5EaI-SlUOgS-Y3J",
+      "EZmnI-oGk3KqNQcXnk08x"
+    ]
+  },
+  {
+    "collectionName": "Spicy",
+    "description": "Because why settle for something plain, right?",
+    "id": "spicy",
+    "imageUrl": "https://www.thecocktaildb.com/images/media/drink/osgvxt1513595509.jpg",
+    "cocktails": [
+      "ebBSPCteh5plAlNCSyNI7",
+      "g4aFH_HK-sU1zM5TAZphV",
+      "dTwOWz_PtwHE7TYCvZ-p_",
+      "4vYgBpRgel-jiZodY-XS2",
+      "4d67P26y-SnDf2uqKhtYF",
+      "0vD3gafsXINzvHJjJyH1h",
+      "5MLlKP6aAsUTxIlDg9NZN",
+      "faCT7g8lAIaBDsRwuNRs0",
+      "SDIBnP9Rvcodae1Mc64TY",
+      "ccwvtDxAVJLoBWaApkNeP"
+    ]
+  },
+  {
+    "collectionName": "Christmas",
+    "description": "Jingle bells, and sometimes glasses and heads",
+    "id": "christmas",
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/blood-orange-spritz-ghk-1543265945.jpg",
+    "cocktails": [
+      "g4aFH_HK-sU1zM5TAZphV",
+      "1socb7-fv9FKc99C2o0-r",
+      "m_gFIzZ__o4mFMbj3Igem",
+      "nwxlVfEGQlV4HKqwMoMfl",
+      "5tTj_isrPOq2flP-TF-st",
+      "ccwvtDxAVJLoBWaApkNeP",
+      "EThh67pPuBH5pw417ERnm",
+      "xWdFAn8VFvbf85os25WgW",
+      "GMiEX_8YMYb5Xx4GGmwNT",
+      "O7Uv8Czeko5AtRGJ21ZD9",
+      "8od4UGV0ZpwTmC5HMJGnS",
+      "ZeKoX0j5_6zvJhCc88x_-"
+    ]
+  },
+  {
+    "collectionName": "Lana Del Rey coded",
+    "description": "Mother invented bows and cherry coke drinks",
+    "id": "lana",
+    "imageUrl": "https://i.pinimg.com/736x/ee/39/a1/ee39a1d00b44e1b43166ec5d5489f232.jpg",
+    "cocktails": [
+      "vnZZuOCqZsyXAz4bPnSzb",
+      "yYJgMcxQTwuO-P0Zd36uV",
+      "H8Vnp4Dd1uBzqb6aOBYhP",
+      "UgOocvClrsvSkmW2RfY_u",
+      "6x8X5XXT9rmzL__AeZh9D",
+      "Pe3xDzBH6J8KibhV6DTOK",
+      "O5QJWghau9zI2eVo8WFDY",
+      "LmF_OZVnBqXFc_c36d2pO",
+      "0XUg7d5HzocH_1iq8J2G8",
+      "gFGMbKavz5UWX_kO0Cn34",
+      "Jp16Dyhzipbq_UfVgRvkj",
+      "roazNxwJZwTbhtgUN5rlS",
+      "fBkMyTQJZ1bQn6sFHL-cq",
+      "Ep1_oICDyxnhc-fKy_FAA",
+      "8od4UGV0ZpwTmC5HMJGnS",
+      "XgNqWvC4yMqUDV8EKdgMw"
+    ]
+  },
+  {
+    "collectionName": "Summertime",
+    "description": " Because who doesn't love sipping fancy drinks while sweating in the sun? Cheers to pretending we enjoy the heat!",
+    "id": "summer",
+    "imageUrl": "https://i.pinimg.com/736x/45/9a/c7/459ac7d7256486ddb2a3efed781f6b2f.jpg",
+    "cocktails": [
+      "da-3S9e_XsaAGwCS2jYa2",
+      "Ep1_oICDyxnhc-fKy_FAA",
+      "6x8X5XXT9rmzL__AeZh9D",
+      "yYJgMcxQTwuO-P0Zd36uV",
+      "Q0SOzlGyYqOkRhYr6yK_z",
+      "JqM9Plr13t2Sfg-aBte5T",
+      "PnR0uYzHIlNouxXbi8Ubn",
+      "OjagFOuj0UAHXhD7opT4J",
+      "3Nr9PUV5A8wPBL-3mDUuW",
+      "qEjojQf7MGmx2w0DODH4q",
+      "roazNxwJZwTbhtgUN5rlS",
+      "XgNqWvC4yMqUDV8EKdgMw",
+      "A0mEIBvbMxWlbcuvfyGFH",
+      "CFeOABIdvmVY4B97QM7g0",
+      "5tTj_isrPOq2flP-TF-st",
+      "KWlZCX9wEYZfwuzo6A062",
+      "gFGMbKavz5UWX_kO0Cn34",
+      "lIgyP5ZLT9_mIpSu4ZB4A",
+      "WABJg__KnbGcVtE736DX0",
+      "jPLxCj1rXdcIZ0cdhb3K2",
+      "he1WSl_mupqLq7dm4HOj1",
+      "k9B9SpeVbyZ9Qxnt-6jtR",
+      "xLlioDe2j99-fAD72V8Qp",
+      "MrnlDoy6EgZr4omVkLpCH"
+    ]
+  },
+  {
+    "collectionName": "Fav healthy alcohol free cocktails",
+    "description": "Perfect for when you want to pretend you're having fun. Cheers to the most exhilarating night of your life – not!",
+    "id": "healthy",
+    "imageUrl": "https://images.pexels.com/photos/17525270/pexels-photo-17525270/free-photo-of-orange-drink-with-ice-cubes-and-peach.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "cocktails": [
+      "50x7kWRzRscTJimFXzaj4",
+      "n2RJpibJGX4_xXcvqcZzi",
+      "AJ5UfyAcovcg7goqvQELN",
+      "9t71aT0mYprJ62prNfj7b",
+      "eHnh-ywI57gjMrlHeuXHn",
+      "Ow5zwsw4qDXGrMxmGa-Ao",
+      "JqM9Plr13t2Sfg-aBte5T",
+      "k9B9SpeVbyZ9Qxnt-6jtR",
+      "MrnlDoy6EgZr4omVkLpCH",
+      "vLkPbW0ML0sGvrYlEimEU",
+      "YuDzvgvuClYeFJqE57rrz",
+      "O5QJWghau9zI2eVo8WFDY"
+    ]
+  }
+]

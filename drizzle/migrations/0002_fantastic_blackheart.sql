@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "collection_idx" ON "collections_to_cocktails" USING btree ("collection_id");
