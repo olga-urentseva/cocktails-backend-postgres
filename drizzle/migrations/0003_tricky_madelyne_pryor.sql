@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "name" ON "ingredients" USING btree ("name");

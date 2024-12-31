@@ -11,10 +11,18 @@ export const cocktails = pgTable("cocktails", {
   credits: text("credits"),
 });
 
-export const ingredients = pgTable("ingredients", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-});
+export const ingredients = pgTable(
+  "ingredients",
+  {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+  },
+  (table) => {
+    return {
+      nameIdx: index("name").on(table.name),
+    };
+  }
+);
 
 export const ingredientsToCocktails = pgTable(
   "ingredients_to_cocktails",

@@ -1,0 +1,35 @@
+[
+  {
+    "collectionName": "Spring",
+    "id": "spring",
+    "description": "From zesty citrus blends to light floral infusions, for all of you who are tired of this f winter.",
+    "imageUrl": "https://images.pexels.com/photos/8755230/pexels-photo-8755230.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "cocktails": [
+      "CFeOABIdvmVY4B97QM7g0",
+      "GGkCOT98WCbIv95j7wEIN",
+      "yYJgMcxQTwuO-P0Zd36uV"
+    ]
+  },
+  {
+    "collectionName": "Hozier core",
+    "description": "Forrest daddy's core cocktails and drinks. Not too sweet, I promise",
+    "id": "hozier",
+    "imageUrl": "https://i.pinimg.com/736x/de/9a/cf/de9acff7fd7d8217d2e5a71358e77450.jpg",
+    "cocktails": [
+      "CFeOABIdvmVY4B97QM7g0",
+      "unncqbbKx4w8R9zshSqwl",
+      "1rTrgLPNB9l7IBn2BxWW-"
+    ]
+  },
+  {
+    "collectionName": "Lana core",
+    "description": "My fav",
+    "id": "lana",
+    "imageUrl": "https://www.thecocktaildb.com/images/media/drink/osgvxt1513595509.jpg",
+    "cocktails": [
+      "O5QJWghau9zI2eVo8WFDY",
+      "LmF_OZVnBqXFc_c36d2pO",
+      "vnZZuOCqZsyXAz4bPnSzb"
+    ]
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "cocktailName": "Mojito",
+    "id": "CFeOABIdvmVY4B97QM7g0",
+    "ingredients": [
+      { "id": "8jktJa_o5NhC5IIV8iAYM", "measure": "2-3 oz " },
+      { "id": "qX4-t8vATRL5jmp6HkaC3", "measure": "Juice of 1 " }
+    ],
+    "instruction": "Muddle mint leaves with sugar and lime juice. Add a splash of soda water and fill the glass with cracked ice. Pour the rum and top with soda water. Garnish and serve with straw.",
+    "pictureURL": "https://www.thecocktaildb.com/images/media/drink/metwgh1606770327.jpg",
+    "isAlcoholic": true,
+    "glass": "Highball glass",
+    "credits": null
+  },
+  {
+    "cocktailName": "White Russian",
+    "id": "GGkCOT98WCbIv95j7wEIN",
+    "ingredients": [
+      { "id": "qX4-t8vATRL5jmp6HkaC3", "measure": "2 oz " },
+      { "id": "XVaFW_qLseytc6UaBo5v4", "measure": null }
+    ],
+    "instruction": "Pour vodka and coffee liqueur over ice cubes in an old-fashioned glass. Fill with light cream and serve.",
+    "pictureURL": "https://www.thecocktaildb.com/images/media/drink/vsrupw1472405732.jpg",
+    "isAlcoholic": true,
+    "glass": "Old-fashioned glass",
+    "credits": null
+  },
+  {
+    "cocktailName": "Whiskey neat",
+    "id": "unncqbbKx4w8R9zshSqwl",
+    "ingredients": [{ "id": "-eVjF6c4oymcx3bc7JT2W", "measure": null }],
+    "instruction": "To enjoy whiskey neat, pour two ounces into a lowball glass at room temperature and savor slowly. No ice, just pure whiskey, to ensure it's not too sweet.",
+    "pictureURL": "https://i.pinimg.com/736x/de/9a/cf/de9acff7fd7d8217d2e5a71358e77450.jpg",
+    "isAlcoholic": true,
+    "glass": "Neat Glass, lowball glass",
+    "credits": null
+  },
+  {
+    "cocktailName": "Black coffee",
+    "id": "1rTrgLPNB9l7IBn2BxWW-",
+    "ingredients": [
+      { "id": "YE7FY9L5mzEp3mPp4apSW", "measure": "1-2 tbsp" },
+      { "id": "tuS8HQMH5mFjaF_-v88lh", "measure": "6 oz" }
+    ],
+    "instruction": "Brewing black coffee involves grinding fresh coffee beans to a medium-coarse consistency, using approximately 1-2 tablespoons of coffee grounds per 6 ounces of hot water heated to a temperature between 90-96°C. Let the coffee steep for about 4 minutes before serving it without any additives, allowing you to fully appreciate its natural flavor profile. And no sugar because you don't want to make it too sweet",
+    "pictureURL": "https://i.pinimg.com/736x/a1/f9/a4/a1f9a4e83c5ea53683f649c3e3981d87.jpg",
+    "isAlcoholic": false,
+    "glass": "Coffee cup",
+    "credits": null
+  },
+  {
+    "cocktailName": "Salvatore",
+    "id": "yYJgMcxQTwuO-P0Zd36uV",
+    "ingredients": [
+      { "id": "-eVjF6c4oymcx3bc7JT2W", "measure": "2 oz" },
+      { "id": "qX4-t8vATRL5jmp6HkaC3", "measure": "top up with" },
+      { "id": "XVaFW_qLseytc6UaBo5v4", "measure": "dash" }
+    ],
+    "instruction": "Fill a glass with limoncello. Add prosecco, dash of the orange bitter ant top up with cold prosecco. Strain and serve with lime or orange wheel (optional).",
+    "pictureURL": "https://i.pinimg.com/736x/c3/2a/98/c32a98c5f59e731bbbd2ac7b1c52f93a.jpg",
+    "isAlcoholic": true,
+    "glass": "Cocktail Glass",
+    "credits": "Lelya Lelya (app owner)"
+  },
+  {
+    "cocktailName": "Cherry Cola",
+    "id": "vnZZuOCqZsyXAz4bPnSzb",
+    "ingredients": [{ "id": "8D2XnMvxYiKIPDoBFlHFX", "measure": "1 bottle" }],
+    "instruction": "Just mix these two wonderful ingredients together and the Lana Del Rey's favourite drink is ready.",
+    "pictureURL": "https://i.pinimg.com/736x/ee/39/a1/ee39a1d00b44e1b43166ec5d5489f232.jpg",
+    "isAlcoholic": false,
+    "glass": "Beer Glass",
+    "credits": "Picture by Lelya Lelya (app owner)"
+  },
+  {
+    "cocktailName": "Peach mocktail",
+    "id": "O5QJWghau9zI2eVo8WFDY",
+    "ingredients": [{ "id": "XVaFW_qLseytc6UaBo5v4", "measure": "top up" }],
+    "instruction": "Mash the cherry and lime, add mint if desired, add a little syrup for sweetness, cover with sparkling water and serve.",
+    "pictureURL": "https://images.pexels.com/photos/17525270/pexels-photo-17525270/free-photo-of-orange-drink-with-ice-cubes-and-peach.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "isAlcoholic": false,
+    "glass": "Cocktail Glass",
+    "credits": null
+  },
+  {
+    "cocktailName": "Sparkle Queen",
+    "id": "LmF_OZVnBqXFc_c36d2pO",
+    "ingredients": [
+      { "id": "8D2XnMvxYiKIPDoBFlHFX", "measure": "top up" },
+      { "id": "8jktJa_o5NhC5IIV8iAYM", "measure": "1/4 of lime" }
+    ],
+    "instruction": "Mix all ingredients, add a little syrup for sweetness, cover with sparkling water and serve.",
+    "pictureURL": "https://images.unsplash.com/photo-1546171753-97d7676e4602?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "isAlcoholic": false,
+    "glass": "Cocktail Glass",
+    "credits": null
+  }
+]
