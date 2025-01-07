@@ -1,4 +1,4 @@
-import test from "node:test";
+import test, { after } from "node:test";
 import assert from "node:assert/strict";
 import { GetCocktailsUseCase } from "./get-cocktails-use-case";
 import * as schema from "../../drizzle/schema";
@@ -10,8 +10,12 @@ const db = drizzle(queryClient, { schema, logger: true });
 
 const useCase = new GetCocktailsUseCase(db);
 
+after(async () => {
+  await queryClient.end();
+});
+
 test("should return cocktails with the specified name", async () => {
-  const filters = { cocktailName: "Mojito" };
+  const filters = { name: "Mojito" };
 
   const result = await useCase.execute(filters);
   const cocktails = result.cocktails;
@@ -28,7 +32,7 @@ test("should return cocktails that are alcoholic", async () => {
 });
 
 test("should return cocktails with specified ingredients", async () => {
-  const filters = { ingredientNames: ["VoDka", "Lime"] };
+  const filters = { ingredients: ["VoDka", "Lime"] };
   const result = await useCase.execute(filters);
   const cocktails = result.cocktails;
   assert.ok(cocktails.some((item) => item.name === "Christmas Cosmo"));
@@ -37,9 +41,9 @@ test("should return cocktails with specified ingredients", async () => {
 
 test("should handle multiple filters correctly", async () => {
   const filters = {
-    cocktailName: "Margarita",
+    name: "Margarita",
     isAlcoholic: true,
-    ingredientNames: ["TeQuila", "lImE"],
+    ingredients: ["TeQuila", "lImE"],
   };
 
   const result = await useCase.execute(filters);
@@ -50,7 +54,7 @@ test("should handle multiple filters correctly", async () => {
 });
 
 test("should return an empty array of cocktails if there is no name matched", async () => {
-  const filters = { cocktailName: "BLAHBLAHBLAH" };
+  const filters = { name: "BLAHBLAHBLAH" };
 
   const result = await useCase.execute(filters);
   const cocktails = result.cocktails;

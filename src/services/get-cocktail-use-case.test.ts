@@ -1,18 +1,26 @@
-import test from "node:test";
+import test, { after, beforeEach } from "node:test";
 import assert from "node:assert/strict";
+
 import { GetCocktailUseCase } from "./get-cocktail-use-case";
 import * as schema from "../../drizzle/schema";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 
-// Configure connection to reuse and minimize connection overhead
 const queryClient = postgres(process.env["DATABASE_URL"]!, {
   max: 1, // Limit to single connection
   idle_timeout: 0, // Keep connection open
 });
 const db = drizzle(queryClient, { schema });
 
-const useCase = new GetCocktailUseCase(db);
+let useCase: GetCocktailUseCase;
+
+beforeEach(() => {
+  useCase = new GetCocktailUseCase(db);
+});
+
+after(async () => {
+  await queryClient.end();
+});
 
 test("should return cocktail with the specified id", async () => {
   const id = "GGkCOT98WCbIv95j7wEIN";
