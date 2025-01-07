@@ -13,7 +13,11 @@ import { GetCollectionUseCase } from "./services/get-collection-use-case";
 import { MyRequest } from "./my-request";
 import { Controller } from "../lib/controller";
 import { swaggerUI } from "@hono/swagger-ui";
-import { GetCollectionController } from "./controllers";
+import {
+  GetCollectionController,
+  GetIngredientsController,
+} from "./controllers";
+import { GetIngredientsUseCase } from "./services/get-ingredients-use-case";
 
 export class Application {
   private readonly controllers;
@@ -39,6 +43,7 @@ export class Application {
     const getCocktailUseCase = new GetCocktailUseCase(this.db);
     const getCocktailsUseCase = new GetCocktailsUseCase(this.db);
     const getCollectionUseCase = new GetCollectionUseCase(this.db);
+    const getIngredientsUseCase = new GetIngredientsUseCase(this.db);
 
     return {
       GetCocktailController: new controllers.GetCocktailController(
@@ -49,6 +54,9 @@ export class Application {
       ),
       GetCollectionController: new GetCollectionController(
         getCollectionUseCase,
+      ),
+      GetIngredientsController: new GetIngredientsController(
+        getIngredientsUseCase,
       ),
     };
   }

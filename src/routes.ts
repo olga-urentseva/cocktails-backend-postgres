@@ -33,4 +33,10 @@ export const routes = defineRoutes([
     controller: "GetCollectionController",
     action: "handle",
   },
+  {
+    method: "get",
+    url: "/ingredients",
+    controller: "GetIngredientsController",
+    action: "handle",
+  },
 ]);
