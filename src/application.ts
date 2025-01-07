@@ -13,11 +13,9 @@ import { GetCollectionUseCase } from "./services/get-collection-use-case";
 import { MyRequest } from "./my-request";
 import { Controller } from "../lib/controller";
 import { swaggerUI } from "@hono/swagger-ui";
-import {
-  GetCollectionController,
-  GetIngredientsController,
-} from "./controllers";
+
 import { GetIngredientsUseCase } from "./services/get-ingredients-use-case";
+import { GetCollectionsUseCase } from "./services/get-collections-use-case";
 
 export class Application {
   private readonly controllers;
@@ -44,19 +42,23 @@ export class Application {
     const getCocktailsUseCase = new GetCocktailsUseCase(this.db);
     const getCollectionUseCase = new GetCollectionUseCase(this.db);
     const getIngredientsUseCase = new GetIngredientsUseCase(this.db);
+    const getCollectionsUseCase = new GetCollectionsUseCase(this.db);
 
     return {
       GetCocktailController: new controllers.GetCocktailController(
-        getCocktailUseCase,
+        getCocktailUseCase
       ),
       GetCocktailsController: new controllers.GetCocktailsController(
-        getCocktailsUseCase,
+        getCocktailsUseCase
       ),
-      GetCollectionController: new GetCollectionController(
-        getCollectionUseCase,
+      GetCollectionController: new controllers.GetCollectionController(
+        getCollectionUseCase
       ),
-      GetIngredientsController: new GetIngredientsController(
-        getIngredientsUseCase,
+      GetIngredientsController: new controllers.GetIngredientsController(
+        getIngredientsUseCase
+      ),
+      GetCollectionsController: new controllers.GetCollectionsController(
+        getCollectionsUseCase
       ),
     };
   }
@@ -134,7 +136,7 @@ export class Application {
             {
               status: 500,
               headers: { "Content-Type": "application/json" },
-            },
+            }
           );
         }
       });
