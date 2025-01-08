@@ -34,7 +34,7 @@ export class GetCollectionsController extends Controller {
                   name: "spring",
                   id: "llNO7ABV5rRP3PMERSVLV",
                   description: "spring is da town",
-                  pictureURL: "https:///",
+                  pictureURL: "https://",
                 },
               ],
             }),
