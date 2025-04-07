@@ -17,7 +17,6 @@
   "dependencies": {
     "@hono/node-server": "^1.13.1",
     "@hono/swagger-ui": "^0.5.1",
-    "@hono/zod-openapi": "^0.16.4",
     "drizzle-orm": "^0.32.0",
     "fastify": "^4.28.0",
     "hono": "^4.7.5",
