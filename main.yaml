@@ -1,0 +1,38 @@
+name: Cocktail Backend Postgres workflow
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: build and push
+        run: |
+          docker build -t ghcr.io/olga-urentseva/cocktails-backend-postgres:${{github.sha}} .
+          docker push ghcr.io/olga-urentseva/cocktails-backend-postgres:${{github.sha}}
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_RSA_KEY }}
+      - run: echo "159.223.195.255 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDFy62mbbtRdNw9jMhkSihYMsDAxDGY8ggWdsEMWY+x/8NJhI/LUhK/92pynfUXu4svVpTAcxbfI92PimBIQdJ5c6kyqDsh+ZYDxo6NhfYZrv/ZH3nrjHohdDHls4izsI95WmC3RLgQS0VJp8/Nv2+xCXfh7EoWtg7NulP/1HZVshGs6kllq7Z5Gxou8zC+2L7U1KGz8MzvZIUNmgdZEeH5O256Lg15y7v455o3i8f4Byzx7nC7MCUEwAmwkQPLTcHskIh1qkCvWV7gKOSMwsYkk+Kp3szP80EjVcyQCjC40vmsNFTlnowor5lKhtUjQ17BtLySbDVuJw/3k5H85tM8AWZGsYQfJET6DLska+dIXVs+HCaFXrJDgljJ0lIexL78nkGbYG5KbaMSzs2ZCe1xF+7evqzsvG+68x5A7BqrfJC3wzobDQaFJpU8Sibuva4J+eynb1HhbfKD50dbjhYuk3VE4eTDTHvdgpFSn5pkjDzp/SrVTsyHDlA6MUaiFFs=" >> ~/.ssh/known_hosts
+      - run: docker context create --docker host=ssh://deployer@159.223.195.255 my-server
+      - run: docker context use my-server
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose.production.yml --with-registry-auth cocktails-backend-postgres
+      - run: docker image prune -f
