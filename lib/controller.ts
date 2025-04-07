@@ -1,24 +1,39 @@
-import {
-  type AnyZodObject,
-  type ZodEffects,
-  type ZodType,
-  ZodTypeAny,
-} from "zod";
+import type { AnyZodObject, ZodEffects, ZodType } from "zod";
 import { MyRequest } from "../src/my-request";
 import { MyResponse } from "../src/my-response";
 
+// type ContentType =
+//   | "application/json"
+//   | "text/html"
+//   | "text/plain"
+//   | "application/xml"
+//   | (string & {});
+
+// type RequestBody = {
+//   content: {
+//     [K in ContentType]?: {
+//       schema:
+//         | AnyZodObject
+//         | ZodEffects<AnyZodObject, unknown, unknown>
+//         | undefined;
+//     };
+//   };
+// };
+
 export abstract class Controller {
-  public abstract readonly requestSchemas: {
-    queryParams?:
+  public abstract readonly request: {
+    queryParamsSchema?:
       | AnyZodObject
       | ZodEffects<AnyZodObject, unknown, unknown>
       | undefined;
-    params?:
+    paramsSchema?:
       | AnyZodObject
       | ZodEffects<AnyZodObject, unknown, unknown>
       | undefined;
-    body?: ZodTypeAny;
-    headers?:
+    body?: {
+      content: Record<string, { schema: ZodType<unknown> }>;
+    };
+    headersSchema?:
       | AnyZodObject
       | ZodEffects<AnyZodObject, unknown, unknown>
       | undefined;
@@ -32,23 +47,16 @@ export abstract class Controller {
       // links?: LinksObject;
       content: Partial<
         Record<
-          | "application/json"
-          | "text/html"
-          | "text/plain"
-          | "application/xml"
-          | (string & {}),
+          string,
           {
             schema: ZodType<unknown>;
-            // examples?: ExamplesObject;
-            // example?: any;
-            // encoding?: EncodingObject;
           }
         >
       >;
     }
   >;
   public abstract handle(
-    request: MyRequest<this["requestSchemas"]>,
+    request: MyRequest<this["request"]>
   ):
     | Promise<MyResponse<keyof this["responses"]>>
     | MyResponse<keyof this["responses"]>;

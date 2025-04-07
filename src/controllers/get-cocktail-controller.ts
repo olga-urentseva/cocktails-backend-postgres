@@ -10,8 +10,8 @@ export class GetCocktailController extends Controller {
     super();
   }
 
-  public readonly requestSchemas = {
-    params: z.object({
+  public readonly request = {
+    paramsSchema: z.object({
       id: z.string().openapi({
         param: {
           name: "id",
@@ -64,7 +64,7 @@ export class GetCocktailController extends Controller {
                   measure: z.string().nullable().openapi({
                     example: "1 oz",
                   }),
-                }),
+                })
               ),
             })
             .nullable(),
@@ -86,10 +86,9 @@ export class GetCocktailController extends Controller {
   };
 
   async handle(
-    request: MyRequest<typeof this.requestSchemas>,
+    request: MyRequest<typeof this.request>
   ): Promise<MyResponse<keyof GetCocktailController["responses"]>> {
-    const { id } = request.params;
-
+    const id = request.paramsSchema.id;
     const result = await this.getCocktailUseCase.execute(id);
     if (!result) {
       return new MyResponse(JSON.stringify({ error: "Not Found" }), {

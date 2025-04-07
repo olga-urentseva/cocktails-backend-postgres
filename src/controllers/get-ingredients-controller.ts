@@ -9,8 +9,8 @@ export class GetIngredientsController extends Controller {
     super();
   }
 
-  public readonly requestSchemas = {
-    queryParams: z
+  public readonly request = {
+    queryParamsSchema: z
       .object({
         prefix: z
           .string()
@@ -38,7 +38,7 @@ export class GetIngredientsController extends Controller {
                   name: z.string(),
                   id: z.string(),
                 })
-                .strict(),
+                .strict()
             )
             .openapi({
               example: [
@@ -58,10 +58,10 @@ export class GetIngredientsController extends Controller {
   };
 
   async handle(
-    request: MyRequest<typeof this.requestSchemas>,
+    request: MyRequest<typeof this.request>
   ): Promise<MyResponse<keyof GetIngredientsController["responses"]>> {
     const result = await this.getIngredientsUseCase.execute(
-      request.queryParams.prefix,
+      request.queryParamsSchema.prefix
     );
 
     return new MyResponse(JSON.stringify(result), {

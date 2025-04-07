@@ -1,5 +1,5 @@
 import { serve } from "@hono/node-server";
-import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
+import { createRoute, OpenAPIHono } from "hono-zod-openapi-patched";
 import z, { type AnyZodObject } from "zod";
 
 import { Db } from "./db";
@@ -9,13 +9,12 @@ import { routes } from "./routes";
 import { GetCocktailUseCase } from "./services/get-cocktail-use-case";
 import { GetCocktailsUseCase } from "./services/get-cocktails-use-case";
 import { GetCollectionUseCase } from "./services/get-collection-use-case";
+import { GetIngredientsUseCase } from "./services/get-ingredients-use-case";
+import { GetCollectionsUseCase } from "./services/get-collections-use-case";
 
 import { MyRequest } from "./my-request";
 import { Controller } from "../lib/controller";
 import { swaggerUI } from "@hono/swagger-ui";
-
-import { GetIngredientsUseCase } from "./services/get-ingredients-use-case";
-import { GetCollectionsUseCase } from "./services/get-collections-use-case";
 
 export class Application {
   private readonly controllers;
@@ -67,29 +66,19 @@ export class Application {
     routes.forEach((routeData) => {
       const controller: Controller = this.controllers[routeData.controller];
 
-      const action = controller.handle.bind(controller);
-
       const route = createRoute({
-        method: routeData.method as
-          | "get"
-          | "post"
-          | "put"
-          | "delete"
-          | "patch"
-          | "head"
-          | "options"
-          | "trace",
-        path: routeData.url as string,
+        method: routeData.method,
+        path: routeData.url,
         request: {
-          ...(controller.requestSchemas.params
-            ? {
-                params: controller.requestSchemas.params,
-              }
+          ...(controller.request.paramsSchema
+            ? { params: controller.request.paramsSchema }
             : {}),
-          ...(controller.requestSchemas.queryParams
-            ? {
-                query: controller.requestSchemas.queryParams,
-              }
+          ...(controller.request.queryParamsSchema
+            ? { query: controller.request.queryParamsSchema }
+            : {}),
+          ...(controller.request.body ? { body: controller.request.body } : {}),
+          ...(controller.request.headersSchema
+            ? { headers: controller.request.headersSchema }
             : {}),
         },
         responses: controller.responses,
@@ -101,23 +90,24 @@ export class Application {
           in: {
             param: Record<string, string> | undefined;
             query: Record<string, string | string[]> | undefined;
+            header: Record<string, string> | undefined;
           };
           out: {
             param: z.infer<AnyZodObject> | undefined;
             query: z.infer<AnyZodObject> | undefined;
+            header: z.infer<AnyZodObject> | undefined;
           };
         }
       >(route, async (c) => {
         try {
           const params = c.req.valid("param");
           const queryParams = c.req.valid("query");
+          const headers = c.req.valid("header");
+          const body = c.get("validatedBody");
 
-          const request = new MyRequest<{
-            params: typeof controller.requestSchemas.params;
-            queryParams: typeof controller.requestSchemas.queryParams;
-          }>(params, queryParams);
+          const request = new MyRequest(params, queryParams, body, headers);
 
-          const response = await action(request);
+          const response = await controller.handle(request);
 
           if (!response) {
             return new Response(null, {

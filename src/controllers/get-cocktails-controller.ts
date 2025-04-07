@@ -9,8 +9,8 @@ export class GetCocktailsController extends Controller {
     super();
   }
 
-  public readonly requestSchemas = {
-    queryParams: z
+  public readonly request = {
+    queryParamsSchema: z
       .object({
         name: z
           .string()
@@ -102,7 +102,7 @@ export class GetCocktailsController extends Controller {
                   credits: z.string().nullable().openapi({
                     example: "Classic recipe",
                   }),
-                }),
+                })
               ),
               pagination: z.object({
                 currentPage: z.number().openapi({
@@ -148,11 +148,11 @@ export class GetCocktailsController extends Controller {
   };
 
   async handle(
-    request: MyRequest<typeof this.requestSchemas>,
+    request: MyRequest<typeof this.request>
   ): Promise<MyResponse<keyof GetCocktailsController["responses"]>> {
     const result = await this.getCocktailsUseCase.execute(
-      request.queryParams,
-      1,
+      request.queryParamsSchema,
+      1
     );
 
     return new MyResponse(JSON.stringify(result), {

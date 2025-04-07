@@ -10,8 +10,8 @@ export class GetCollectionController extends Controller {
     super();
   }
 
-  public readonly requestSchemas = {
-    params: z.object({
+  public readonly request = {
+    paramsSchema: z.object({
       id: z.string().openapi({
         param: {
           name: "id",
@@ -48,9 +48,9 @@ export class GetCollectionController extends Controller {
   };
 
   async handle(
-    request: MyRequest<typeof this.requestSchemas>,
+    request: MyRequest<typeof this.request>
   ): Promise<MyResponse<keyof GetCollectionController["responses"]>> {
-    const { id } = request.params;
+    const { id } = request.paramsSchema;
 
     const result = await this.getCollectionUseCase.execute(id);
 

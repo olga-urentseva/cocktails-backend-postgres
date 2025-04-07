@@ -1,5 +1,7 @@
 {
+
   "extends": ["@tsconfig/node22/tsconfig", "@tsconfig/strictest/tsconfig"],
+  "include": ["lib/**/*.ts"],
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler",

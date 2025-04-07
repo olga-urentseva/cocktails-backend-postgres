@@ -10,7 +10,7 @@ export class GetCollectionsController extends Controller {
     super();
   }
 
-  public readonly requestSchemas = {};
+  public readonly request = {};
 
   public readonly responses = {
     200: {
