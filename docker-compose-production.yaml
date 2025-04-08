@@ -45,3 +45,5 @@ networks:
     external: true
   db:
     external: true
+volumes:
+  cocktails-db-data:
