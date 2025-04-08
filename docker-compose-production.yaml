@@ -1,5 +1,5 @@
 services:
-  cocktails-backend-postgres:
+  cocktails-backend-postgres-app:
     image: ghcr.io/olga-urentseva/cocktails-backend-postgres:${GIT_COMMIT_SHA}
     networks:
       - proxy
