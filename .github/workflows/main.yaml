@@ -34,5 +34,5 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose.production.yml --with-registry-auth cocktails-backend-postgres
+      - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose.production.yaml --with-registry-auth cocktails-backend-postgres
       - run: docker image prune -f
