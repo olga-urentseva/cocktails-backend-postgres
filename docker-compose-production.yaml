@@ -1,4 +1,15 @@
 services:
+  database:
+    image: postgres:16.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: cocktails-backend
+      POSTGRES_DB: cocktails
+    volumes:
+      - cocktails-db-data:/var/lib/postgresql/data
+    networks:
+      - db
   cocktails-backend-postgres:
     image: ghcr.io/olga-urentseva/cocktails-backend-postgres:${GIT_COMMIT_SHA}
     networks:
