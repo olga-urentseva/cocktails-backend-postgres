@@ -4,6 +4,8 @@ services:
     networks:
       - proxy
       - db
+    environment:
+      DATABASE_URL: "postgres://postgres:REDACTED@postgres:5432/postgres"
     deploy:
       labels:
         - "traefik.enable=true"
