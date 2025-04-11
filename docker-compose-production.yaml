@@ -30,6 +30,16 @@ services:
       update_config:
         parallelism: 1
         order: start-first
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "PGPASSWORD='J2f2rPFGKVAVo39PAuuzH' pg_isready -h postgres -U postgres || exit 1",
+        ]
+      interval: 10s # How often the status will be checked
+      retries: 5 # How many times to check before exist (if unavailable)
+      start_period: 10s # Time to wait before starting the first check
+      timeout: 10s # Timeout for each test run
 
 networks:
   proxy:

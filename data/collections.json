@@ -19,7 +19,7 @@
     ]
   },
   {
-    "collectionName": "Classic",
+    "collectionName": "Classic cocktails",
     "description": "Сlassics never go out of date, unlike you",
     "id": "classic",
     "imageUrl": "https://www.thecocktaildb.com/images/media/drink/wfqmgm1630406820.jpg",
@@ -75,7 +75,7 @@
     "collectionName": "Christmas",
     "description": "Jingle bells, and sometimes glasses and heads",
     "id": "christmas",
-    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/blood-orange-spritz-ghk-1543265945.jpg",
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/cherry-sidecar-1625070898.jpg",
     "cocktails": [
       "m_gFIzZ__o4mFMbj3Igem",
       "nwxlVfEGQlV4HKqwMoMfl",
@@ -165,6 +165,46 @@
       "vLkPbW0ML0sGvrYlEimEU",
       "YuDzvgvuClYeFJqE57rrz",
       "O5QJWghau9zI2eVo8WFDY"
+    ]
+  },
+  {
+    "collectionName": "Halloween cocktails",
+    "description": "Drink these Halloween cocktails if you dare — because nothing's scarier than your bartending skills.",
+    "id": "halloween",
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/pumpkin-spice-white-russian-1666638654.jpg",
+    "cocktails": [
+      "TLGSQ-AqvDnGRzQKorYPp",
+      "ccwvtDxAVJLoBWaApkNeP",
+      "xWdFAn8VFvbf85os25WgW",
+      "g4aFH_HK-sU1zM5TAZphV",
+      "2adokMc1VAJzDR9u37xeA",
+      "J2zL8xU8zIsX_UiWq190p",
+      "hFqi9tPUg21SlxhoRNWYw",
+      "SDIBnP9Rvcodae1Mc64TY",
+      "ZeKoX0j5_6zvJhCc88x_-",
+      "9IEnlM0yBCnhcYftTM8c1",
+      "APrg-ZswrNjzh2B4lZkql",
+      "faCT7g8lAIaBDsRwuNRs0"
+    ]
+  },
+  {
+    "collectionName": "Winter",
+    "description": "Winter is coming, and so are the drinks. Warm up with these winter cocktails that are perfect for the season.",
+    "id": "winter",
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/vanilla-citrus-honey-sangria-1623352911.jpg",
+    "cocktails": [
+      "O7Uv8Czeko5AtRGJ21ZD9",
+      "m_gFIzZ__o4mFMbj3Igem",
+      "r8HaOIzZ2iSUb-9gbeEiK",
+      "rFnb479QXqxUbY4hOm7jD",
+      "ccwvtDxAVJLoBWaApkNeP",
+      "EThh67pPuBH5pw417ERnm",
+      "GMiEX_8YMYb5Xx4GGmwNT",
+      "SvVnCmHHfDHPvAxN0o8Ox",
+      "fj09BMExpUGwOlT16APrp",
+      "fNkqsVbnohqexb8TFqfdL",
+      "rSsCKTSHw3mDcYUVR2fgU",
+      "GKGK2_noBw61JmcH_5vJn"
     ]
   }
 ]
