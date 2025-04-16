@@ -37,13 +37,13 @@ jobs:
       - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
       - name: Run Migrations and Seeds
         run: |
+          GIT_COMMIT_SHA=${{ github.sha }}
           docker service create \
             --name cocktails-backend-migrate \
             --network db \
-            
             --entrypoint "pnpm npx drizzle-kit migrate && pnpm npx drizzle/seeds/init.ts" \
             --detach \
-            ghcr.io/olga-urentseva/cocktails-backend-postgres:${{github.sha}}
+            ghcr.io/olga-urentseva/cocktails-backend-postgres:$GIT_COMMIT_SHA
 
       - name: Remove Migration Service
         run: docker service rm cocktails-backend-migrate
