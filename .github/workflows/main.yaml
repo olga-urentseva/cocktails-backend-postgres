@@ -40,8 +40,9 @@ jobs:
           docker service create \
             --name cocktails-backend-migrate \
             --network db \
-            -- detach \ 
+            
             --entrypoint "pnpm npx drizzle-kit migrate && pnpm npx drizzle/seeds/init.ts" \
+            --detach \
             ghcr.io/olga-urentseva/cocktails-backend-postgres:${{github.sha}}
 
       - name: Remove Migration Service
