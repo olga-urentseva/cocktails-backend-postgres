@@ -36,6 +36,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
 
+      # in case if the service was created, but wasn't deleted, because migration/seeds failed
       - name: Remove Previous Migration Service (if exists)
         run: docker service rm cocktails-backend-migrate || true
       - name: Run Migrations and Seeds

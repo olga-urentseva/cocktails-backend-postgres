@@ -6,6 +6,16 @@ services:
       - db
     environment:
       DATABASE_URL: "postgres://postgres:REDACTED@postgres:5432/postgres"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "PGPASSWORD='REDACTED' pg_isready -h postgres -U postgres || exit 1",
+        ]
+      interval: 10s # How often the status will be checked
+      retries: 5 # How many times to check before exist (if unavailable)
+      start_period: 10s # Time to wait before starting the first check
+      timeout: 10s # Timeout for each test run
     deploy:
       labels:
         - "traefik.enable=true"
