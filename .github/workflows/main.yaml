@@ -35,10 +35,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
-      - run: |
-          docker --context my-server run --rm \
+      - name: Run Migrations and Seeds
+        run: |
+          docker service create \
+            --name cocktails-backend-migrate \
             --network db \
-            -e DATABASE_URL=postgres://postgres:J2f2rPFGKVAVo39PAuuzH@postgres:5432/postgres \
-            ghcr.io/olga-urentseva/cocktails-backend-postgres:${{ github.sha }} \
-            sh -c "pnpm npx drizzle-kit migrate && pnpm npx drizzle/seeds/init.ts"
+            -- detach \ 
+            --entrypoint "pnpm npx drizzle-kit migrate && pnpm npx drizzle/seeds/init.ts" \
+            ghcr.io/olga-urentseva/cocktails-backend-postgres:${{github.sha}}
+
+      - name: Remove Migration Service
+        run: docker service rm cocktails-backend-migrate
+
       - run: docker image prune -f
