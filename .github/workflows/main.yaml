@@ -36,20 +36,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
 
-      # in case if the service was created, but wasn't deleted, because migration/seeds failed
-      - name: Remove Previous Migration Service (if exists)
-        run: docker service rm cocktails-backend-migrate || true
-      - name: Run Migrations and Seeds
-        run: |
-          GIT_COMMIT_SHA=${{ github.sha }}
-          docker service create \
-            --name cocktails-backend-migrate \
-            --network db \
-            --entrypoint "pnpm npx drizzle-kit migrate && pnpm npx drizzle/seeds/init.ts" \
-            --detach \
-            ghcr.io/olga-urentseva/cocktails-backend-postgres:$GIT_COMMIT_SHA
-
-      - name: Remove Migration Service
-        run: docker service rm cocktails-backend-migrate
+      - run: docker -c my-server service exec cocktails-backend-postgres pnpm npx drizzle-kit migrate
+      - run: docker -c my-server service exec cocktails-backend-postgres pnpm npx drizzle/seeds/init.ts
 
       - run: docker image prune -f
