@@ -36,4 +36,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: GIT_COMMIT_SHA=${{github.sha}} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
 
+      - run: docker service create --name temp-migrations --network db --restart-condition=none ghcr.io/olga-urentseva/cocktails-backend-postgres:${{github.sha}} pnpm npx drizzle-kit migrate
       - run: docker image prune -f
