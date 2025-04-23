@@ -66,9 +66,6 @@ jobs:
       - name: Pre-pull migrations image on server
         run: docker pull ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }}
 
-      - name: Remove existing migration service if it exists
-        run: docker service rm cocktail-migrations || true
-
       - name: Run migrations via migration service
         run: |
           docker service create \
@@ -79,7 +76,7 @@ jobs:
             ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} \
             pnpm drizzle-kit migrate
 
-          docker service rm cocktail-migrations
+          # docker service rm cocktail-migrations
 
       - name: Clean up images
         run: docker image prune -f
