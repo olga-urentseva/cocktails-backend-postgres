@@ -81,7 +81,7 @@ jobs:
             ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} \
             pnpm drizzle-kit migrate
 
-          docker service rm cocktail-migrations
+          # docker service rm cocktail-migrations
 
       - name: Clean up images
         run: docker image prune -f
