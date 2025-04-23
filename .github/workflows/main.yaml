@@ -66,17 +66,22 @@ jobs:
       - name: Pre-pull migrations image on server
         run: docker pull ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }}
 
+      - name: remove migration service if exists
+        run: |
+          docker service rm cocktail-migrations || echo "Service cocktail-migrations not found, skipping removal"
+
       - name: Run migrations via migration service
         run: |
           docker service create \
             --name cocktail-migrations \
             --detach=false \
+            --env DATABASE_URL=${{ secrets.DATABASE_URL }} \
             --env GIT_COMMIT_SHA=${{ github.sha }} \
             --network db \
             ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} \
             pnpm drizzle-kit migrate
 
-          # docker service rm cocktail-migrations
+          docker service rm cocktail-migrations
 
       - name: Clean up images
         run: docker image prune -f
