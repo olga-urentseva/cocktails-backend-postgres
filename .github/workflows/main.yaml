@@ -28,7 +28,7 @@ jobs:
 
       - name: Build and push migration image
         run: |
-          docker build --target build -t ghcr.io/olga-urentseva/cocktails-migrations:${GIT_COMMIT_SHA} --no-cache --progress=plain .
+          docker build --target build -t ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} --no-cache --progress=plain .
           docker push ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }}
 
       - name: Set up SSH
