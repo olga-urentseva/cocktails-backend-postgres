@@ -28,7 +28,7 @@ jobs:
 
       - name: Build and push migration image
         run: |
-          docker build --target build -t ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} .
+          docker build --target build -t ghcr.io/olga-urentseva/cocktails-migrations:${GIT_COMMIT_SHA} --no-cache --progress=plain .
           docker push ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }}
 
       - name: Set up SSH
@@ -53,6 +53,9 @@ jobs:
 
       - name: Deploy stack
         run: GIT_COMMIT_SHA=${{ github.sha }} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
+
+      - name: Pre-pull migrations image on server
+        run: docker pull ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }}
 
       - name: Run migrations via migration service
         run: |
