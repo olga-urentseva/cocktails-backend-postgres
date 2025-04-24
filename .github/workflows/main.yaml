@@ -76,7 +76,7 @@ jobs:
             --env GIT_COMMIT_SHA=${{ github.sha }} \
             --network db \
             ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} \
-            sh -c "pnpm why tsx "
+            sh -c "pnpm why tsx && pnpm drizzle-kit migrate"
             
           # pnpm drizzle-kit migrate && pnpm tsx drizzle/seeds/init.ts
           # docker service rm cocktail-migrations
