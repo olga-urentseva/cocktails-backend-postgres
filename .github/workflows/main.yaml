@@ -78,7 +78,7 @@ jobs:
             ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} \
             sh -c "pnpm drizzle-kit migrate && pnpm tsx drizzle/seeds/init.ts"
             
-          docker service rm cocktail-migrations
+          # docker service rm cocktail-migrations
 
       - name: Deploy stack
         run: GIT_COMMIT_SHA=${{ github.sha }} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
