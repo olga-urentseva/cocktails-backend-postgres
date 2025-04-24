@@ -76,7 +76,7 @@ jobs:
             --env GIT_COMMIT_SHA=${{ github.sha }} \
             --network db \
             ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} \
-            sh -c 'pnpm drizzle-kit migrate && until pg_isready -h "$${DATABASE_URL#*//}" -U postgres; do echo "waiting for db..."; done && pnpm tsx drizzle/seeds/init.ts'
+            sh -c 'until pg_isready -h "$${DATABASE_URL#*//}" -U postgres; do echo "waiting for db..."; done && pnpm tsx drizzle/seeds/init.ts'
             
           # pnpm drizzle-kit migrate && pnpm tsx drizzle/seeds/init.ts
           # docker service rm cocktail-migrations
