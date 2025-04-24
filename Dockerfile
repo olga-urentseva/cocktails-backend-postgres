@@ -6,6 +6,7 @@ COPY . .
 
 RUN pnpm install
 RUN pnpm build
+RUN apk add --no-cache postgresql-client
 
 FROM node:22-alpine
 ENV HOST=0.0.0.0
