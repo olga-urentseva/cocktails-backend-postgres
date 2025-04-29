@@ -56,7 +56,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy stack
-        run: GIT_COMMIT_SHA=${{ github.sha }} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres
+        run: GIT_COMMIT_SHA=${{ github.sha }} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth --detach=false cocktails-backend-postgres
 
       - name: Clean up images
         run: docker image prune -f
