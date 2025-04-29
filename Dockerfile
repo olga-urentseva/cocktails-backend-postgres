@@ -15,6 +15,9 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY package.json .
 COPY pnpm-lock.yaml .
+COPY drizzle.config.ts .
+COPY drizzle/ ./drizzle/
+COPY data/ ./data/
 
 RUN corepack enable
 RUN pnpm install --prod

@@ -35,11 +35,6 @@ jobs:
           docker build -t ghcr.io/olga-urentseva/cocktails-backend-postgres:${{ github.sha }} .
           docker push ghcr.io/olga-urentseva/cocktails-backend-postgres:${{ github.sha }}
 
-      - name: Build and push migration image
-        run: |
-          docker build --target build -t ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} --no-cache --progress=plain .
-          docker push ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }}
-
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -59,27 +54,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Pre-pull migrations image on server
-        run: docker pull ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }}
-
-      - name: remove migration service if exists
-        run: |
-          docker service rm cocktail-migrations || echo "Service cocktail-migrations not found, skipping removal"
-
-      - name: Run migrations via migration service
-        run: |
-          docker service create \
-            --name cocktail-migrations \
-            --detach=false \
-            --env DATABASE_URL=${{ secrets.DATABASE_URL }} \
-            --env GIT_COMMIT_SHA=${{ github.sha }} \
-            --network db \
-            ghcr.io/olga-urentseva/cocktails-migrations:${{ github.sha }} \
-            sh -c 'until pg_isready -h "$${DATABASE_URL#*//}" -U postgres; do echo "waiting for db..."; done && pnpm tsx drizzle/seeds/init.ts'
-            
-          # pnpm drizzle-kit migrate && pnpm tsx drizzle/seeds/init.ts
-          # docker service rm cocktail-migrations
 
       - name: Deploy stack
         run: GIT_COMMIT_SHA=${{ github.sha }} docker stack deploy -c ./docker-compose-production.yaml --with-registry-auth cocktails-backend-postgres

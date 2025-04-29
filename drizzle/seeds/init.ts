@@ -1,10 +1,11 @@
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { sql } from "drizzle-orm";
+import { readFileSync } from "node:fs";
 
-import cocktailsRawData from "../../data/cocktails.json";
-import ingredientsRawData from "../../data/ingredients.json";
-import collectionsRawData from "../../data/collections.json";
+import cocktailsRawData from "../../data/cocktails.json" with { type: "json" };
+import ingredientsRawData from "../../data/ingredients.json" with { type: "json" };
+import collectionsRawData from "../../data/collections.json" with { type: "json" };
 
 import {
   cocktails,
@@ -12,11 +13,24 @@ import {
   ingredientsToCocktails,
   collections,
   collectionsToCocktails,
-} from "../schema";
+} from "../schema.ts";
+import { assert } from "node:console";
 
-if (!("DATABASE_URL" in process.env)) throw new Error("DATABASE_URL not found");
+function ensure<T>(value: T): NonNullable<T> {
+  if (typeof value === "undefined" || value === null) {
+    throw new Error("missing value");
+  }
 
-const queryClient = postgres(process.env["DATABASE_URL"]!);
+  return value;
+}
+
+const DATABASE_URL =
+  process.env["DATABASE_URL"] ??
+  readFileSync(ensure(process.env["DATABASE_URL_SECRET_PATH"]), "utf-8").trim();
+
+assert(DATABASE_URL);
+
+const queryClient = postgres(DATABASE_URL);
 
 const db = drizzle(queryClient);
 

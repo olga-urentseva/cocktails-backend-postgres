@@ -17,6 +17,7 @@
   "dependencies": {
     "@hono/node-server": "^1.13.1",
     "@hono/swagger-ui": "^0.5.1",
+    "drizzle-kit": "^0.23.0",
     "drizzle-orm": "^0.32.0",
     "fastify": "^4.28.0",
     "hono": "^4.7.5",
@@ -33,11 +34,10 @@
     "@types/http-errors": "^2.0.4",
     "@types/node": "^22.6.1",
     "@types/qs": "^6.9.15",
-    "drizzle-kit": "^0.23.0",
     "esbuild": "^0.21.5",
     "fastify-plugin": "^4.5.1",
     "prettier": "^3.3.3",
     "tsx": "^4.15.7",
-    "typescript": "^5.5.2"
+    "typescript": "^5.8.3"
   }
 }

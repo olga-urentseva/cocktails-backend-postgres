@@ -5,7 +5,7 @@ services:
       - proxy
       - db
     environment:
-      DATABASE_URL: "postgres://postgres:REDACTED@postgres:5432/postgres"
+      DATABASE_URL_SECRET_PATH: "/run/secrets/cocktails_database_url"
 
     deploy:
       labels:
@@ -31,6 +31,21 @@ services:
       update_config:
         parallelism: 1
         order: start-first
+    secrets:
+      - cocktails_database_url
+
+  cocktails-migrations:
+    image: ghcr.io/olga-urentseva/cocktails-backend-postgres:${GIT_COMMIT_SHA}
+    networks:
+      - db
+    environment:
+      - DATABASE_URL_SECRET_PATH=/run/secrets/cocktails_database_url
+    deploy:
+      mode: replicated-job
+      replicas: 1
+    secrets:
+      - cocktails_database_url
+    command: pnpm drizzle-kit migrate && node --experimental-strip-types ./drizzle/seeds/init.ts
 
 networks:
   proxy:
