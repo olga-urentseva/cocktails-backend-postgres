@@ -43,9 +43,9 @@ services:
     deploy:
       mode: replicated-job
       replicas: 1
+    command: pnpm drizzle-kit migrate && node --experimental-strip-types ./drizzle/seeds/init.ts
     secrets:
       - cocktails_database_url
-    command: pnpm drizzle-kit migrate && node --experimental-strip-types ./drizzle/seeds/init.ts
 
 networks:
   proxy:
