@@ -1,5 +1,4 @@
 import { z } from "hono-zod-openapi-patched";
-
 import { Controller } from "../../lib/controller";
 import type { IGetCocktailsUseCase } from "../services/get-cocktails-use-case";
 import { MyRequest } from "../my-request";
@@ -119,6 +118,16 @@ export class GetCocktailsController extends Controller {
                   example: 48,
                 }),
               }),
+              additionalData: z.object({
+                numberOfCocktails: z.object({
+                  isAlcoholic: z.number().openapi({
+                    example: 30,
+                  }),
+                  nonAlcoholic: z.number().openapi({
+                    example: 18,
+                  }),
+                }),
+              }),
             })
             .openapi({
               example: {
@@ -139,6 +148,12 @@ export class GetCocktailsController extends Controller {
                   pageSize: 10,
                   totalPages: 5,
                   totalItems: 48,
+                },
+                additionalData: {
+                  numberOfCocktails: {
+                    isAlcoholic: 30,
+                    nonAlcoholic: 18,
+                  },
                 },
               },
             }),

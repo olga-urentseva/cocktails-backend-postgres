@@ -17,7 +17,7 @@ type Filters = {
 export interface IGetCocktailsUseCase {
   execute(
     filters: Filters,
-    page: number | undefined,
+    page: number | undefined
   ): Promise<{
     cocktails: Array<typeof schema.cocktails.$inferSelect>;
     pagination: {
@@ -25,6 +25,12 @@ export interface IGetCocktailsUseCase {
       pageSize: number;
       totalPages: number;
       totalItems: number;
+    };
+    additionalData: {
+      numberOfCocktails: {
+        isAlcoholic: number;
+        nonAlcoholic: number;
+      };
     };
   }>;
 }
@@ -55,7 +61,7 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
 
     if (filters.name) {
       conditions.push(
-        ilike(schema.cocktails.name, filters.name.toLocaleLowerCase()),
+        ilike(schema.cocktails.name, filters.name.toLocaleLowerCase())
       );
     }
     if (filters.isAlcoholic !== undefined) {
@@ -68,8 +74,8 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
           schema.collectionsToCocktails,
           and(
             eq(schema.cocktails.id, schema.collectionsToCocktails.cocktailId),
-            eq(schema.collectionsToCocktails.collectionId, filters.collection),
-          ),
+            eq(schema.collectionsToCocktails.collectionId, filters.collection)
+          )
         );
       } else {
         return query;
@@ -79,22 +85,22 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
     const q3 = (() => {
       if (filters.ingredients) {
         const lowerCaseIngredientNames = filters.ingredients.map((name) =>
-          name.toLowerCase(),
+          name.toLowerCase()
         );
         conditions.push(
-          inArray(lower(schema.ingredients.name), lowerCaseIngredientNames),
+          inArray(lower(schema.ingredients.name), lowerCaseIngredientNames)
         );
         return query
           .innerJoin(
             schema.ingredientsToCocktails,
-            eq(schema.cocktails.id, schema.ingredientsToCocktails.cocktailId),
+            eq(schema.cocktails.id, schema.ingredientsToCocktails.cocktailId)
           )
           .innerJoin(
             schema.ingredients,
             eq(
               schema.ingredients.id,
-              schema.ingredientsToCocktails.ingredientId,
-            ),
+              schema.ingredientsToCocktails.ingredientId
+            )
           )
           .groupBy(
             schema.cocktails.id,
@@ -103,7 +109,7 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
             schema.cocktails.pictureURL,
             schema.cocktails.isAlcoholic,
             schema.cocktails.glass,
-            schema.cocktails.credits,
+            schema.cocktails.credits
           )
           .having(eq(count(schema.ingredients.id), filters.ingredients.length));
       } else {
@@ -127,6 +133,20 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
 
     const totalPages = Math.ceil(totalItems / this.PAGE_SIZE);
 
+    // Get the counts of alcoholic and non-alcoholic cocktails
+    const alcoholicCountResult = await this.database
+      .select({ count: count() })
+      .from(schema.cocktails)
+      .where(eq(schema.cocktails.isAlcoholic, true));
+
+    const nonAlcoholicCountResult = await this.database
+      .select({ count: count() })
+      .from(schema.cocktails)
+      .where(eq(schema.cocktails.isAlcoholic, false));
+
+    const alcoholicCount = alcoholicCountResult[0]?.count || 0;
+    const nonAlcoholicCount = nonAlcoholicCountResult[0]?.count || 0;
+
     return {
       cocktails: searchedByFiltersCocktails,
       pagination: {
@@ -134,6 +154,12 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
         pageSize: this.PAGE_SIZE,
         totalPages,
         totalItems,
+      },
+      additionalData: {
+        numberOfCocktails: {
+          isAlcoholic: alcoholicCount,
+          nonAlcoholic: nonAlcoholicCount,
+        },
       },
     };
   }
