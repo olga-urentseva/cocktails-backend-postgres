@@ -44,13 +44,6 @@ export class MyRequest<
         >;
       };
     }[keyof NonNullable<TSchemas["body"]>["content"]],
-    // public readonly body: NonNullable<TSchemas["body"]> extends {
-    //   content: Record<string, { schema: infer R }>;
-    // }
-    //   ? R extends ZodTypeAny
-    //     ? z.infer<R>
-    //     : undefined
-    //   : never,
 
     public readonly headersSchema: TSchemas["headersSchema"] extends infer R
       ? R extends ZodTypeAny

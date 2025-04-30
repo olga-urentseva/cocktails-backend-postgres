@@ -1,7 +1,8 @@
+import { z } from "hono-zod-openapi-patched";
+
 import { Controller } from "../../lib/controller";
 import { IGetIngredientsUseCase } from "../services/get-ingredients-use-case";
 import { MyRequest } from "../my-request";
-import { z } from "zod";
 import { MyResponse } from "../my-response";
 
 export class GetIngredientsController extends Controller {

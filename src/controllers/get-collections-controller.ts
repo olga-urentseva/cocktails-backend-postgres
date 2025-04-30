@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "hono-zod-openapi-patched";
 
 import { Controller } from "../../lib/controller";
 import { IGetCollectionsUseCase } from "../services/get-collections-use-case";

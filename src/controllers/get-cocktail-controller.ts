@@ -1,8 +1,8 @@
-import { MyRequest } from "../my-request";
+import { z } from "hono-zod-openapi-patched";
 
+import { MyRequest } from "../my-request";
 import type { IGetCocktailUseCase } from "../services/get-cocktail-use-case";
 import { Controller } from "../../lib/controller";
-import { z } from "zod";
 import { MyResponse } from "../my-response";
 
 export class GetCocktailController extends Controller {
