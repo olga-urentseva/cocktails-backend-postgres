@@ -52,3 +52,7 @@ networks:
     external: true
   db:
     external: true
+
+secrets:
+  cocktails_database_url:
+    external: true
