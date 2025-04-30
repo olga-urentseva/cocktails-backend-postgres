@@ -120,7 +120,7 @@ export class GetCocktailsController extends Controller {
               }),
               additionalData: z.object({
                 numberOfCocktails: z.object({
-                  isAlcoholic: z.number().openapi({
+                  alcoholic: z.number().openapi({
                     example: 30,
                   }),
                   nonAlcoholic: z.number().openapi({
@@ -151,7 +151,7 @@ export class GetCocktailsController extends Controller {
                 },
                 additionalData: {
                   numberOfCocktails: {
-                    isAlcoholic: 30,
+                    alcoholic: 30,
                     nonAlcoholic: 18,
                   },
                 },

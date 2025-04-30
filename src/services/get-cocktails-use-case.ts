@@ -28,7 +28,7 @@ export interface IGetCocktailsUseCase {
     };
     additionalData: {
       numberOfCocktails: {
-        isAlcoholic: number;
+        alcoholic: number;
         nonAlcoholic: number;
       };
     };
@@ -157,7 +157,7 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
       },
       additionalData: {
         numberOfCocktails: {
-          isAlcoholic: alcoholicCount,
+          alcoholic: alcoholicCount,
           nonAlcoholic: nonAlcoholicCount,
         },
       },
