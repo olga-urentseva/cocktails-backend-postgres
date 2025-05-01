@@ -118,16 +118,6 @@ export class GetCocktailsController extends Controller {
                   example: 48,
                 }),
               }),
-              additionalData: z.object({
-                numberOfCocktails: z.object({
-                  alcoholic: z.number().openapi({
-                    example: 30,
-                  }),
-                  nonAlcoholic: z.number().openapi({
-                    example: 18,
-                  }),
-                }),
-              }),
             })
             .openapi({
               example: {
@@ -148,12 +138,6 @@ export class GetCocktailsController extends Controller {
                   pageSize: 10,
                   totalPages: 5,
                   totalItems: 48,
-                },
-                additionalData: {
-                  numberOfCocktails: {
-                    alcoholic: 30,
-                    nonAlcoholic: 18,
-                  },
                 },
               },
             }),

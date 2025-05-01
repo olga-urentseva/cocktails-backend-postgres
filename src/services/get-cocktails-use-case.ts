@@ -26,12 +26,6 @@ export interface IGetCocktailsUseCase {
       totalPages: number;
       totalItems: number;
     };
-    additionalData: {
-      numberOfCocktails: {
-        alcoholic: number;
-        nonAlcoholic: number;
-      };
-    };
   }>;
 }
 
@@ -43,7 +37,7 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
   }
 
   async execute(filters: Filters, page: number = 1) {
-    const conditions = [];
+    const conditions: SQL[] = [];
     const offset = (page - 1) * this.PAGE_SIZE;
 
     const cocktailsColumn = {
@@ -133,20 +127,6 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
 
     const totalPages = Math.ceil(totalItems / this.PAGE_SIZE);
 
-    // Get the counts of alcoholic and non-alcoholic cocktails
-    const alcoholicCountResult = await this.database
-      .select({ count: count() })
-      .from(schema.cocktails)
-      .where(eq(schema.cocktails.isAlcoholic, true));
-
-    const nonAlcoholicCountResult = await this.database
-      .select({ count: count() })
-      .from(schema.cocktails)
-      .where(eq(schema.cocktails.isAlcoholic, false));
-
-    const alcoholicCount = alcoholicCountResult[0]?.count || 0;
-    const nonAlcoholicCount = nonAlcoholicCountResult[0]?.count || 0;
-
     return {
       cocktails: searchedByFiltersCocktails,
       pagination: {
@@ -154,12 +134,6 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
         pageSize: this.PAGE_SIZE,
         totalPages,
         totalItems,
-      },
-      additionalData: {
-        numberOfCocktails: {
-          alcoholic: alcoholicCount,
-          nonAlcoholic: nonAlcoholicCount,
-        },
       },
     };
   }
