@@ -55,7 +55,8 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
 
     if (filters.name) {
       conditions.push(
-        ilike(schema.cocktails.name, `%${filters.name.toLocaleLowerCase()}%`)
+        sql`(${ilike(schema.cocktails.name, `${filters.name.toLocaleLowerCase()}%`)} OR
+             ${ilike(schema.cocktails.name, `% ${filters.name.toLocaleLowerCase()}%`)})`
       );
     }
     if (filters.isAlcoholic !== undefined) {
