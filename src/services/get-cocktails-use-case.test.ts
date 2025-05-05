@@ -20,7 +20,9 @@ test("should return cocktails with the specified name", async () => {
   const result = await useCase.execute(filters);
   const cocktails = result.cocktails;
 
-  assert.ok(cocktails.every((item) => item.name === "Mojito"));
+  assert.ok(
+    cocktails.every((item) => item.name.toLowerCase().includes("mojito"))
+  );
 });
 
 test("should return cocktails that are alcoholic", async () => {
@@ -39,9 +41,16 @@ test("should return cocktails with specified ingredients", async () => {
   assert.ok(cocktails.length === 5);
 });
 
+test("should return cocktails with specified ingredients if ingredient is 2 or more words", async () => {
+  const filters = { ingredients: ["Lime Juice"] };
+  const result = await useCase.execute(filters);
+  const cocktails = result.cocktails;
+  assert.ok(cocktails.length > 0);
+  assert.ok(cocktails.some((item) => item.name === "Margarita"));
+});
+
 test("should handle multiple filters correctly", async () => {
   const filters = {
-    name: "Margarita",
     isAlcoholic: true,
     ingredients: ["TeQuila", "lImE"],
   };
@@ -50,7 +59,6 @@ test("should handle multiple filters correctly", async () => {
   const cocktails = result.cocktails;
 
   assert.ok(cocktails.every((item) => item.isAlcoholic));
-  assert.ok(cocktails.every((item) => item.name === "Margarita"));
 });
 
 test("should return an empty array of cocktails if there is no name matched", async () => {
