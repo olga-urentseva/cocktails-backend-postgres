@@ -152,7 +152,7 @@ export class GetCocktailsController extends Controller {
   ): Promise<MyResponse<keyof GetCocktailsController["responses"]>> {
     const result = await this.getCocktailsUseCase.execute(
       request.queryParamsSchema,
-      1
+      request.queryParamsSchema.page
     );
 
     return new MyResponse(JSON.stringify(result), {
