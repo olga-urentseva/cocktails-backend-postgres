@@ -1,5 +1,5 @@
 export const seasonalCollectionsIds = [
-  "spring",
+  "summer",
   "healthy",
   "coffee",
   "classic",
