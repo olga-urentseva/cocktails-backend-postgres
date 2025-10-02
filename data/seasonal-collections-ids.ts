@@ -1,8 +1,8 @@
 export const seasonalCollectionsIds = [
-  "halloween",
+  "classic",
   "spicy",
   "coffee",
-  "classic",
+  "halloween",
   "lana",
   "hozier",
 ];
