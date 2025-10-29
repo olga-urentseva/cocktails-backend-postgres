@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-to-digitalocean:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -60,25 +60,44 @@ jobs:
 
       - name: Clean up images
         run: docker image prune -f
-  
+
   deploy-to-aws:
-    needs: build
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Free up space on GitHub Actions runner
+        run: |
+          echo "🧹 Cleaning up GitHub Actions runner to free space"
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /usr/lib/jvm
+          df -h
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push backend image
+        run: |
+          docker build -t ghcr.io/olga-urentseva/cocktails-backend-postgres:${{ github.sha }} .
+          docker push ghcr.io/olga-urentseva/cocktails-backend-postgres:${{ github.sha }}
+
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.PRIVATE_RSA_KEY_AWS }}
 
-      - name: Add AWS host to known_hosts
-        run: |
-          ssh-keyscan -H 18.188.62.59 >> ~/.ssh/known_hosts
+      - name: Add remote host to known_hosts
+        run: echo "18.188.62.59 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC34+2oocEbXHtIS275EdrsfGgom1V24SeN/oUXFI7tjhseJxq/pYtLBUnwpxZA0flDLKkeYsLTxkTjyEjp0S8BWuUKxQi6+eH4QqgwNGkFObON9OtliDXH+n+9JxOn+RkNMVpKqk1GND7dvs754z6cwpJDs7/vOtjh/5YnKhxOrqUYT8DIGR0rexQW6RfcBhU6Cs3Qb3QhJqwx6nZi9rsTzpDPLyoRIqWiMKmwp43h/FR6dExQYDA14TmVsN7+FlyhgSJollIebXkiL83JzTQZ3TPBLCqfQm1hERGNmlZiiTpo1WEpqrfN+isaX9BzF1WF4we3yT3ttOmRJI5YoFSeZzvPo4lmHv8CV214V9SD7IKGAx7y5GOrDS9Ky/QeyMvZaxPUGxlDO7OFjsqEjM0oT+/eP8/s3F6Ue3McSxj1NaEg2CqQ2ETrP8i0vZrY0b+a6QAMYxAGaaKFII0vufaHvUFhxVnaI/QfT65LgyoQYjilaLGu214Rd/vODP2krPc=" >> ~/.ssh/known_hosts
 
-      - name: Connect to AWS server
+      - name: Connect to remote server and deploy stack
         run: |
           docker context create --docker host=ssh://admin@18.188.62.59 aws-server
           docker context use aws-server
@@ -90,8 +109,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy stack to AWS
-        run: GIT_COMMIT_SHA=${{ github.sha }} docker stack deploy -c ./compose-production-aws.yaml --with-registry-auth --detach=false cocktails-backend-postgres
+      - name: Deploy stack
+        run: GIT_COMMIT_SHA=${{ github.sha }} docker stack deploy -c ./docker-compose-production-aws.yaml --with-registry-auth --detach=false cocktails-backend-postgres
 
       - name: Clean up images
         run: docker image prune -f
