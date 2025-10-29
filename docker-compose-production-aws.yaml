@@ -1,0 +1,63 @@
+services:
+  cocktails-backend-postgres-app:
+    image: ghcr.io/olga-urentseva/cocktails-backend-postgres:${GIT_COMMIT_SHA}
+    networks:
+      - proxy
+      - db
+    environment:
+      DATABASE_URL_SECRET_PATH: "/run/secrets/cocktails_database_url"
+
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.services.cocktails-backend-postgres.loadbalancer.server.port=9090"
+        - "traefik.http.routers.cocktails-backend-postgres-web.rule=Host(`bartender-aws.mooo.com`)"
+        - "traefik.http.routers.cocktails-backend-postgres-web.entrypoints=web"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.rule=Host(`bartender-aws.mooo.com`)"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.entrypoints=websecure"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.tls=true"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.tls.certresolver=letsencrypt"
+
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+        - "traefik.http.routers.cocktails-backend-postgres-web.middlewares=redirect-to-https"
+
+        - "traefik.http.middlewares.cors.headers.accesscontrolallowmethods=GET"
+        - "traefik.http.middlewares.cors.headers.accesscontrolallowheaders=*"
+        - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=*"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.middlewares=cors"
+
+      replicas: 2
+      update_config:
+        parallelism: 1
+        order: start-first
+    secrets:
+      - cocktails_database_url
+
+  cocktails-migrations:
+    image: ghcr.io/olga-urentseva/cocktails-backend-postgres:${GIT_COMMIT_SHA}
+    networks:
+      - db
+    environment:
+      - DATABASE_URL_SECRET_PATH=/run/secrets/cocktails_database_url
+    deploy:
+      mode: replicated-job
+      replicas: 1
+    command:
+      [
+        "sh",
+        "-c",
+        "pnpm drizzle-kit migrate && node --experimental-strip-types ./drizzle/seeds/init.ts",
+      ]
+    secrets:
+      - cocktails_database_url
+
+networks:
+  proxy:
+    external: true
+  db:
+    external: true
+
+secrets:
+  cocktails_database_url:
+    external: true
