@@ -11,9 +11,9 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.http.services.cocktails-backend-postgres.loadbalancer.server.port=9090"
-        - "traefik.http.routers.cocktails-backend-postgres-web.rule=Host(`bartender-api.mooo.com`)"
+        - "traefik.http.routers.cocktails-backend-postgres-web.rule=Host(`bartender-api.mooo.com`) || Host(`api.bartttender.com`)"
         - "traefik.http.routers.cocktails-backend-postgres-web.entrypoints=web"
-        - "traefik.http.routers.cocktails-backend-postgres-websecure.rule=Host(`bartender-api.mooo.com`)"
+        - "traefik.http.routers.cocktails-backend-postgres-websecure.rule=Host(`bartender-api.mooo.com`) || Host(`api.bartttender.com`)"
         - "traefik.http.routers.cocktails-backend-postgres-websecure.entrypoints=websecure"
         - "traefik.http.routers.cocktails-backend-postgres-websecure.tls=true"
         - "traefik.http.routers.cocktails-backend-postgres-websecure.tls.certresolver=letsencrypt"
