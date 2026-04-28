@@ -44,6 +44,17 @@ export class GetCocktailsController extends Controller {
             },
             example: ["vodka", "lime"],
           }),
+        exact: z
+          .enum(["true", "false"])
+          .transform((value) => value === "true")
+          .optional()
+          .openapi({
+            param: {
+              name: "exact",
+              in: "query",
+            },
+            example: "true",
+          }),
         collection: z
           .string()
           .optional()
