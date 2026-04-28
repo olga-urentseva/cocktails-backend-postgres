@@ -11,6 +11,7 @@ type Filters = {
   name?: string | undefined;
   isAlcoholic?: boolean | undefined;
   ingredients?: string[] | undefined;
+  exact?: boolean | undefined;
   collection?: string | undefined;
 };
 
@@ -106,7 +107,14 @@ export class GetCocktailsUseCase implements IGetCocktailsUseCase {
             schema.cocktails.glass,
             schema.cocktails.credits
           )
-          .having(eq(count(schema.ingredients.id), filters.ingredients.length));
+          .having(
+            filters.exact
+              ? and(
+                  eq(count(schema.ingredients.id), filters.ingredients.length),
+                  sql`(select count(*) from ${schema.ingredientsToCocktails} where ${schema.ingredientsToCocktails.cocktailId} = ${schema.cocktails.id}) = ${filters.ingredients.length}`
+                )
+              : eq(count(schema.ingredients.id), filters.ingredients.length)
+          );
       } else {
         return q2;
       }
