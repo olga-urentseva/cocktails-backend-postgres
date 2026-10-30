@@ -1,3 +1,5 @@
+import { ResponseInit } from 'node-fetch';
+
 export class MyResponse<TStatusCode extends PropertyKey> extends Response {
   // @ts-expect-error https://github.com/microsoft/TypeScript/issues/15300
   private readonly ___weirdHackToPreserveGenericArgument: TStatusCode;
